@@ -22,25 +22,17 @@ import { StateService } from '../../../@core/utils';
           [position]="sidebar.id === 'start' ? 'normal' : 'inverse'"
         ></ngx-header>
       </nb-layout-header>
-
       <nb-sidebar
         class="menu-sidebar"
         tag="menu-sidebar"
         responsive
         [end]="sidebar.id === 'end'"
       >
-        <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
-          <a href="#" class="btn btn-hero-success main-btn">
-            <i class="ion ion-social-github"></i> <span>Support Us</span>
-          </a>
-        </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
-
       <nb-layout-column class="main-content">
         <ng-content select="router-outlet"></ng-content>
       </nb-layout-column>
-
       <nb-layout-column
         start
         class="small"
@@ -48,15 +40,9 @@ import { StateService } from '../../../@core/utils';
       >
         <nb-menu [items]="subMenu"></nb-menu>
       </nb-layout-column>
-
       <nb-layout-column class="small" *ngIf="layout.id === 'three-column'">
         <nb-menu [items]="subMenu"></nb-menu>
       </nb-layout-column>
-
-      <nb-layout-footer fixed>
-        <ngx-footer></ngx-footer>
-      </nb-layout-footer>
-
       <nb-sidebar
         class="settings-sidebar"
         tag="settings-sidebar"
@@ -67,7 +53,6 @@ import { StateService } from '../../../@core/utils';
         <ngx-theme-settings></ngx-theme-settings>
       </nb-sidebar>
     </nb-layout>
-    <ngx-toggle-settings-button></ngx-toggle-settings-button>
   `,
 })
 export class SampleLayoutComponent implements OnDestroy {

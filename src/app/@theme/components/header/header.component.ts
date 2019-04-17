@@ -34,12 +34,4 @@ export class HeaderComponent implements OnInit {
 
     return false;
   }
-
-  goToHome() {
-    this.menuService.navigateHome();
-  }
-
-  startSearch() {
-    this.analyticsService.trackEvent('startSearch');
-  }
 }

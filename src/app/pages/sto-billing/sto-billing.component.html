@@ -1,0 +1,143 @@
+<div class="container-fluid m-2 ">
+  <h4>{{ screenName }}</h4>
+  <hr />
+  <button
+    class="btn"
+    [hidden]="userActionsDisabled"
+    (click)="routeSTO('', 'stoAdd')"
+    *ngIf="interfaceType === 'sto'"
+  >
+    <!-- <mat-icon class="routeIcon pointer red-color">plus</mat-icon>
+    <br /> -->
+    Add New Bill
+  </button>
+  <hr />
+  <form>
+    <div class="border border-primary p-3">
+      <div class="form-group form-inline d-flex justify-content-between p-3">
+        <div>
+          <select
+            class="custom-select"
+            style="width: auto"
+            name="pageSize"
+            [(ngModel)]="service.pageSize"
+          >
+            <option [ngValue]="2">2</option>
+            <option [ngValue]="4">4</option>
+            <option [ngValue]="6">6</option>
+          </select>
+          items per page
+        </div>
+
+        <span class="ml-3" *ngIf="(service.loading$ | async)">Loading...</span>
+        <input
+          class="form-control ml-2 align-right"
+          type="text"
+          placeholder="Start typing to search..."
+          name="searchTerm"
+          [(ngModel)]="service.searchTerm"
+        />
+      </div>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" sortable="vin_num" (sort)="onSort($event)">
+              VIN Num
+            </th>
+            <th scope="col" sortable="fsc_name" (sort)="onSort($event)">
+              FSC Name
+            </th>
+            <th scope="col" sortable="ext_color" (sort)="onSort($event)">
+              Ext. Color
+            </th>
+            <th scope="col" sortable="int_color" (sort)="onSort($event)">
+              Int. Color
+            </th>
+            <th scope="col">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stoRec of (stoRecords$ | async)">
+            <td>
+              <ngb-highlight
+                [result]="stoRec.vin_num"
+                [term]="service.searchTerm"
+              ></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="stoRec.fsc_name"
+                [term]="service.searchTerm"
+              ></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="stoRec.ext_color"
+                [term]="service.searchTerm"
+              ></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="stoRec.int_color"
+                [term]="service.searchTerm"
+              ></ngb-highlight>
+            </td>
+            <td *ngIf="interfaceType === 'sto'">
+              <div (click)="routeSTO(stoRec.first_mile_guid, 'stoView')">
+                <i
+                  style="font-size:30px;color: rgb(139, 138, 228)"
+                  class="fas fa-eye"
+                >
+                </i>
+              </div>
+
+              <!-- <mat-icon
+                class="routeIcon pointer blue-color"
+                (click)="routeSTO(stoRec.first_mile_guid, 'stoView')"
+                >assignment</mat-icon
+              >
+
+              <mat-icon
+                class="routeIcon pointer blue-color"
+                (click)="routeSTO(stoRec.first_mile_guid, 'stoEdit')"
+                >edit</mat-icon
+              >
+
+              <mat-icon
+                class="routeIcon pointer red-color"
+                (click)="openConfirmationDialog(stoRec)"
+                >delete</mat-icon
+              > -->
+            </td>
+            <td *ngIf="interfaceType !== 'sto'">
+              <button
+                class="btn btn-primary"
+                (click)="routeSTO(stoRec.first_mile_guid, '')"
+              >
+                {{ viewButtonName }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          [collectionSize]="total$ | async"
+          [(page)]="service.page"
+          [pageSize]="service.pageSize"
+        >
+        </ngb-pagination>
+      </div>
+    </div>
+  </form>
+
+  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+  </button> -->
+
+  <!-- Modal -->
+</div>

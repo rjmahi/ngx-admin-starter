@@ -1,4 +1,4 @@
-import { APP_BASE_HREF } from '@angular/common';
+import { APP_BASE_HREF, DecimalPipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -23,6 +23,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [DecimalPipe, { provide: APP_BASE_HREF, useValue: '/' }],
 })
 export class AppModule {}

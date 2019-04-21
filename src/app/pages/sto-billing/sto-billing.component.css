@@ -1,0 +1,38 @@
+th {
+  cursor: pointer;
+}
+h1 {
+  text-align: center;
+  color: skyblue;
+}
+.align-right {
+  float: right;
+}
+
+.routeIcon {
+  margin: 5px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.red-color {
+  color: red;
+}
+.blue-color {
+  color: blue;
+}
+
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: RoyalBlue;
+}

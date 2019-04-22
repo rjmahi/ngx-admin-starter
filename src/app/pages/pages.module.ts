@@ -6,6 +6,7 @@ import { STOBillingModule } from './sto-billing/sto-billing.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
+import { NbDialogModule } from '@nebular/theme';
 
 const PAGES_COMPONENTS = [PagesComponent];
 
@@ -14,6 +15,7 @@ const PAGES_COMPONENTS = [PagesComponent];
     PagesRoutingModule,
     STOBillingModule,
     ThemeModule,
+    NbDialogModule.forChild(),
     DashboardModule,
     MiscellaneousModule,
   ],

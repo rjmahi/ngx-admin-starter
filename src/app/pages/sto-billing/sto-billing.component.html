@@ -2,7 +2,7 @@
   <h4>{{ screenName }}</h4>
   <hr />
   <button
-    class="btn"
+    class="btn btn-primary"
     [hidden]="userActionsDisabled"
     (click)="routeSTO('', 'stoAdd')"
     *ngIf="interfaceType === 'sto'"
@@ -86,39 +86,21 @@
               ></ngb-highlight>
             </td>
             <td *ngIf="interfaceType === 'sto'">
-              <div (click)="routeSTO(stoRec.first_mile_guid, 'stoView')">
-                <i
-                  style="font-size:30px;color: rgb(139, 138, 228)"
-                  class="fas fa-eye"
-                >
-                </i>
-              </div>
-
-              <!-- <mat-icon
-                class="routeIcon pointer blue-color"
-                (click)="routeSTO(stoRec.first_mile_guid, 'stoView')"
-                >assignment</mat-icon
-              >
-
-              <mat-icon
-                class="routeIcon pointer blue-color"
-                (click)="routeSTO(stoRec.first_mile_guid, 'stoEdit')"
-                >edit</mat-icon
-              >
-
-              <mat-icon
-                class="routeIcon pointer red-color"
-                (click)="openConfirmationDialog(stoRec)"
-                >delete</mat-icon
-              > -->
+              <span (click)="routeSTO(stoRec.first_mile_guid, 'stoView')">
+                <i class="fas fa-eye icon-stl"> </i>
+              </span>
+              &nbsp;
+              <span (click)="routeSTO(stoRec.first_mile_guid, 'stoEdit')">
+                <i class="fas fa-edit icon-stl"> </i> </span
+              >&nbsp;
+              <span (click)="confirmDelete(stoRec, dialog)">
+                <i class="fas fa-trash icon-stl"> </i>
+              </span>
             </td>
             <td *ngIf="interfaceType !== 'sto'">
-              <button
-                class="btn btn-primary"
-                (click)="routeSTO(stoRec.first_mile_guid, '')"
-              >
-                {{ viewButtonName }}
-              </button>
+              <span (click)="routeSTO(stoRec.first_mile_guid, '')">
+                <i class="fas fa-eye icon-stl"> </i>
+              </span>
             </td>
           </tr>
         </tbody>
@@ -134,7 +116,18 @@
       </div>
     </div>
   </form>
-
+  <ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card>
+      <nb-card-header>Delete Record Confirmation</nb-card-header>
+      <nb-card-body>{{ data }}</nb-card-body>
+      <nb-card-footer>
+        <button nbButton class="pad" (click)="deleteSTORecord(); ref.close()">
+          Yes
+        </button>
+        <button nbButton (click)="ref.close()">No</button>
+      </nb-card-footer>
+    </nb-card>
+  </ng-template>
   <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
     Launch demo modal
   </button> -->

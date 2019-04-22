@@ -71,6 +71,8 @@ export class StoHandlerService {
 
   prepareData(stoListType) {
     this._state.page = 1;
+    this._state.pageSize = 4;
+    this._state.searchTerm = '';
     this.api.getSTORecords(stoListType).subscribe(
       response => {
         if (response != null) {

@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  QueryList,
+  TemplateRef,
+} from '@angular/core';
 import { StoHandlerService } from './../../services/sto-handler.service';
 import { Observable } from 'rxjs';
 import { STOModel, CompactSTOModel } from './../../models/sto-model';
@@ -9,6 +15,8 @@ import {
 import { DecimalPipe } from '@angular/common';
 import { StoApiAccessService } from './../../services/sto-api-access.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NbDialogService } from '@nebular/theme';
+
 @Component({
   selector: 'app-sto-billing',
   templateUrl: './sto-billing.component.html',
@@ -22,7 +30,7 @@ export class StoBillingComponent {
   screenName: string;
   viewButtonName;
   userActionsDisabled = false;
-
+  selectedModel: CompactSTOModel;
   @ViewChildren(SortableHeaderDirective) headers: QueryList<
     SortableHeaderDirective
   >;
@@ -32,6 +40,7 @@ export class StoBillingComponent {
     public route: ActivatedRoute,
     public router: Router,
     public api: StoApiAccessService,
+    private dialogService: NbDialogService,
   ) {
     this.userName = localStorage.getItem('user');
     this.viewButtonName = 'View';
@@ -81,6 +90,13 @@ export class StoBillingComponent {
     this.total$ = service.total$;
   }
 
+  confirmDelete(model: CompactSTOModel, dialog: TemplateRef<any>) {
+    this.selectedModel = model;
+    this.dialogService.open(dialog, {
+      context: 'Are you sure, you want to delete the record?',
+    });
+  }
+
   onSort({ column, direction }: SortEvent) {
     // resetting other headers
     this.headers.forEach(header => {
@@ -93,29 +109,12 @@ export class StoBillingComponent {
     this.service.sortDirection = direction;
   }
 
-  public openConfirmationDialog(compactSTO: CompactSTOModel) {
-    // this.confirmationDialogService
-    //   .confirm(
-    //     'Delete Record Confirmation.',
-    //     'Do you really want to delete the record?',
-    //   )
-    //   .then(confirmed => {
-    //     if (confirmed) {
-    //       this.deleteSTORecord(compactSTO);
-    //     }
-    //   })
-    //   .catch(() =>
-    //     console.log(
-    //       'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)',
-    //     ),
-    //   );
-  }
-
-  deleteSTORecord(compactSTO: CompactSTOModel) {
-    this.api.deleteSTORecord(compactSTO).subscribe(
+  deleteSTORecord() {
+    this.api.deleteSTORecord(this.selectedModel).subscribe(
       response => {
         if (response != null) {
           this.service.prepareData(0);
+          this.selectedModel = null;
         }
       },
       error => {

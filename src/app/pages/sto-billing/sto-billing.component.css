@@ -24,15 +24,12 @@ h1 {
   color: blue;
 }
 
-.btn {
-  background-color: DodgerBlue;
-  border: none;
-  color: white;
-  padding: 12px 16px;
-  font-size: 16px;
+.icon-stl {
+  font-size: 20px;
+  color: rgb(139, 138, 228);
   cursor: pointer;
 }
 
-.btn:hover {
-  background-color: RoyalBlue;
+.pad {
+  margin-right: 10px;
 }

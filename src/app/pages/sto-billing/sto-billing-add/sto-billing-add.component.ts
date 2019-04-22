@@ -227,4 +227,8 @@ export class StoBillingAddComponent implements OnInit {
       this.location.back();
     }
   }
+
+  back() {
+    this.location.back();
+  }
 }

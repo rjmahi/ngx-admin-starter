@@ -292,19 +292,20 @@
         </div>
       </div>
     </div>
-
+    <button type="submit" class="btn btn-primary" (click)="back()">
+      Back
+    </button>
     <button
       type="submit"
-      class="fadeIn fourth"
+      class="btn btn-primary btn-rp"
       (click)="saveSTO()"
-      class="btn btn-default"
       [disabled]="stoForm.invalid"
     >
       {{ saveButtonName }}
     </button>
     <button
       type="button"
-      class="btn btn-default"
+      class="btn btn-primary btn-rp"
       (click)="resetForm()"
       [hidden]="resetButtonHidden"
     >

@@ -12,7 +12,7 @@ import { AnalyticsService } from '../../../@core/utils';
 export class HeaderComponent implements OnInit {
   @Input() position = 'normal';
 
-  user: any;
+  user: any = { name: '', picture: '' };
 
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
@@ -24,9 +24,11 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userService
-      .getUsers()
-      .subscribe((users: any) => (this.user = users.nick));
+    this.user.name = '';
+    this.user.picture = 'assets/images/nick.png';
+    // this.userService
+    //   .getUsers()
+    //   .subscribe((users: any) => (this.user = users.nick));
   }
 
   toggleSidebar(): boolean {

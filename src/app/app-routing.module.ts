@@ -11,6 +11,7 @@ import {
 
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
+  { path: 'auth', loadChildren: 'app/pages/auth/auth.module#NgxAuthModule' },
   {
     path: 'auth',
     component: NbAuthComponent,
@@ -23,22 +24,22 @@ const routes: Routes = [
         path: 'login',
         component: NbLoginComponent,
       },
-      {
-        path: 'register',
-        component: NbRegisterComponent,
-      },
-      {
-        path: 'logout',
-        component: NbLogoutComponent,
-      },
-      {
-        path: 'request-password',
-        component: NbRequestPasswordComponent,
-      },
-      {
-        path: 'reset-password',
-        component: NbResetPasswordComponent,
-      },
+      // {
+      //   path: 'register',
+      //   component: NbRegisterComponent,
+      // },
+      // {
+      //   path: 'logout',
+      //   component: NbLogoutComponent,
+      // },
+      // {
+      //   path: 'request-password',
+      //   component: NbRequestPasswordComponent,
+      // },
+      // {
+      //   path: 'reset-password',
+      //   component: NbResetPasswordComponent,
+      // },
     ],
   },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
